@@ -14,7 +14,7 @@ export default function InputGroup(props) {
          event.target.classList.add("active_cell")
       }
       props.setInfo(event.target.textContent)
-      console.log(event.target.textContent)
+      // console.log(event.target.textContent)
    }
 
 

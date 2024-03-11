@@ -28,7 +28,12 @@ export default function Modal({ onClose, update, data }) {
    const handleSubmit = () => {
       let newMamber = { id: data.length + 1, name: inputName, tel: inputTel, adress: inputAdress, email: inputEmail };
       data.push(newMamber)
-      update(data)
+      localStorage.removeItem('table')
+      localStorage.setItem('table', JSON.stringify(data));
+      console.log("data:", data)
+      console.log(JSON.parse(localStorage.getItem('table')))
+      update(JSON.parse(localStorage.getItem('table')))
+      localStorage.setItem('table', JSON.stringify(data));
       console.log(newMamber);
       // Закрываем модальное окно
       onClose();

@@ -40,6 +40,15 @@ const router = createBrowserRouter([
 
 ]);
 
+
+let tableData = [
+  { id: 1, name: 'John', tel: "+380 67 233 32-12", adress: "Пр. Науки", email: "someone@gmail.com" },
+  { id: 2, name: 'Jane', tel: "+380 67 233 32-12", adress: "Пр. Науки", email: "someone@gmail.com" },
+  { id: 3, name: 'Doe', tel: "+380 67 233 32-12", adress: "Пр. Науки", email: "someone@gmail.com" }
+];
+
+localStorage.setItem('table', JSON.stringify(tableData));
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <RouterProvider router={router} />

@@ -11,6 +11,12 @@ export default function Group() {
       { id: 2, name: 'Jane', tel: "+380 67 233 32-12", adress: "Пр. Науки", email: "someone@gmail.com" },
       { id: 3, name: 'Doe', tel: "+380 67 233 32-12", adress: "Пр. Науки", email: "someone@gmail.com" }
    ];
+
+   let newTable = localStorage.getItem('table');
+   let newTableUpd = JSON.parse(newTable)
+
+
+
    // Модальное окно для ввода данных
    const [modalOpen, setModalOpen] = useState(false)
    function openModal() {
@@ -32,10 +38,7 @@ export default function Group() {
    const [info, setInfo] = useState();
 
 
-
-
-
-   const [tableInfo, setTableInfo] = useState(tableData)
+   const [tableInfo, setTableInfo] = useState(newTableUpd)
 
    return (
       <div>
