@@ -1,0 +1,307 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.login {
+  background: white;
+  margin: 10% auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50vw;
+  height: 50vh;
+  background: #565bb7;
+  border-radius: 15px;
+  color: wheat;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form input {
+  height: 7vh;
+  width: 70%;
+  margin: auto;
+  margin-bottom: 20px;
+  font-size: 3vh;
+
+}
+
+.form input[type=submit] {
+  width: 30%;
+  font-size: 3vh;
+}
+
+.login p {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+a:hover {
+  color: #747bff;
+}
+
+
+
+.active {
+  color: #747bff;
+}
+
+.group_titele {
+
+  display: flex;
+  flex-direction: row;
+  width: 1000px;
+}
+
+.group_input {
+
+  display: flex;
+  flex-direction: row;
+  width: 1000px;
+}
+
+.table_element {
+  box-sizing: border-box;
+  font-size: large;
+  width: 250px;
+  border: #565bb7 solid 2px;
+  padding: 10px 0px 10px 10px;
+  color: rgb(206, 230, 252);
+  user-select: none;
+}
+
+.group_input .table_element:hover {
+  border: white 1px solid;
+}
+
+.active_cell {
+  background: rgb(108, 97, 205);
+  color: black;
+  border: #747bff 1px solid;
+}
+
+.control_panel {
+  background: #3f4389;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.control_button {
+  font-size: large;
+  padding: 10px, 20px;
+}
+
+.modal {
+  background: #3f4389;
+  margin-top: 30px;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.modal span {
+  font-size: 40px;
+  user-select: none;
+}
+
+.modal span:hover {
+  cursor: pointer;
+}
+
+.modal_content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modal input {
+  height: 30px;
+  font-size: 17px;
+  width: 150px;
+}
+
+.modal img {
+  width: 33px;
+  height: 25px;
+
+}
+
+.modal label {
+  font-size: 20px;
+}
+
+.modal button {
+  font-size: large;
+  padding: 10px, 20px;
+}
+
+.editing {
+  background: #3f4389;
+  margin-top: 30px;
+  padding: 10px;
+  border-radius: 6px;
+  display: flex;
+  color: aliceblue;
+  align-items: center;
+
+}
+
+.editing input {
+  height: 30px;
+  font-size: 17px;
+  width: 150px;
+}
+
+.editing img {
+  width: 33px;
+  height: 25px;
+  margin-left: 20px;
+  margin-right: 100px;
+}
+
+.editing span {
+  margin-right: 10px;
+}
+
+.editing button {
+  font-size: large;
+  padding: 10px, 20px;
+  margin-left: 20px;
+}
