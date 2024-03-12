@@ -6,12 +6,6 @@ import Editing from "./group/Editing";
 
 export default function Group() {
 
-   let tableData = [
-      { id: 1, name: 'John', tel: "+380 67 233 32-12", adress: "Пр. Науки", email: "someone@gmail.com" },
-      { id: 2, name: 'Jane', tel: "+380 67 233 32-12", adress: "Пр. Науки", email: "someone@gmail.com" },
-      { id: 3, name: 'Doe', tel: "+380 67 233 32-12", adress: "Пр. Науки", email: "someone@gmail.com" }
-   ];
-
    let newTable = localStorage.getItem('table');
    let newTableUpd = JSON.parse(newTable)
 
@@ -29,13 +23,15 @@ export default function Group() {
 
    const [editing, setEditing] = useState(false)
    function editInput() {
-      setEditing(true);
+      if (!editing) setEditing(true);
+      else setEditing(false)
    };
 
    const saveInput = () => {
+      setTableInfo(JSON.parse(localStorage.getItem('table')))
       setEditing(false);
    };
-   const [info, setInfo] = useState();
+
 
 
    const [tableInfo, setTableInfo] = useState(newTableUpd)
@@ -44,7 +40,7 @@ export default function Group() {
       <div>
          <div className="table">
             <TitleGroup />
-            <InputGroup data={tableInfo} setInfo={setInfo} />
+            <InputGroup data={tableInfo} />
          </div>
          <div className="control_panel">
             <button type="submit" className="control_button" onClick={openModal} >Додати</button>
@@ -52,8 +48,8 @@ export default function Group() {
             <button type="submit" className="control_button">Видалити рядок</button>
          </div>
          {modalOpen && <Modal onClose={closeModal} update={setTableInfo} data={tableInfo} />}
-         {editing && <Editing onClose={saveInput} info={info} setInfo={setInfo} />}
-         {info}
+         {editing && <Editing onClose={saveInput} info={tableInfo} setInfo={setTableInfo} />}
+
       </div>
 
    )

@@ -209,8 +209,9 @@ a:hover {
   border: white 1px solid;
 }
 
+
 .active_cell {
-  background: rgb(108, 97, 205);
+  background: rgba(162, 154, 232, 0.2);
   color: black;
   border: #747bff 1px solid;
 }
@@ -246,6 +247,7 @@ a:hover {
 }
 
 .modal_content {
+  margin-top: 12px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -304,4 +306,11 @@ a:hover {
   font-size: large;
   padding: 10px, 20px;
   margin-left: 20px;
+}
+
+.descr {
+  color: white;
+  font-size: large;
+  text-align: center;
+  margin-bottom: 10px;
 }
