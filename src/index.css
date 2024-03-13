@@ -314,3 +314,18 @@ a:hover {
   text-align: center;
   margin-bottom: 10px;
 }
+
+.deleting_container {
+  background: #3f4389;
+  margin-top: 30px;
+  padding: 10px;
+  border-radius: 6px;
+  display: flex;
+  color: aliceblue;
+  justify-content: space-around;
+}
+
+.deleting_container button {
+  font-size: large;
+  padding: 10px, 20px;
+}
