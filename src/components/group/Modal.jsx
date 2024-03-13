@@ -7,6 +7,8 @@ export default function Modal({ onClose, update, data }) {
    const [inputAdress, setInputAdress] = useState('');
    const [inputEmail, setInputEmail] = useState('');
 
+   const [err, setErr] = useState(false);
+
    const handleChange = (event) => {
       switch (event.target.id) {
          case 'Name':
@@ -22,19 +24,44 @@ export default function Modal({ onClose, update, data }) {
             setInputEmail(event.target.value);
             break;
       }
-
    };
 
    const handleSubmit = () => {
-      let newMamber = { id: data.length + 1, name: inputName, tel: inputTel, adress: inputAdress, email: inputEmail };
-      data.push(newMamber)
-      localStorage.removeItem('table')
-      localStorage.setItem('table', JSON.stringify(data));
-      update(JSON.parse(localStorage.getItem('table')))
-      localStorage.setItem('table', JSON.stringify(data));
-      // Закрываем модальное окно
-      onClose();
+      if (!/\d/.test(inputName) && inputAdress.length >= 3 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail) && !/[a-zA-Z]/.test(inputTel)) {
+         setErr(false)
+         let newMamber = { id: data.length + 1, name: inputName.trim(), tel: inputTel, adress: inputAdress, email: inputEmail };
+         data.push(newMamber)
+         localStorage.removeItem('table')
+         localStorage.setItem('table', JSON.stringify(data));
+         update(JSON.parse(localStorage.getItem('table')))
+         localStorage.setItem('table', JSON.stringify(data));
+         // Закрываем модальное окно
+         onClose();
+      }
+      else setErr(true)
    };
+
+   let Err = () => {
+      let er = "";
+      if (/\d/.test(inputName)) er += "Ім'я ";
+      if (/[a-zA-Z]/.test(inputTel)) er += "Телефон ";
+      if (inputAdress.length <= 3) er += "Адреса ";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail)) er += "Email";
+      
+
+      if (/\d/.test(inputName) || inputAdress.length <= 3 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail) || /[a-zA-Z]/.test(inputTel)) {
+         return (
+            <p className='err'>Щось пішло не за планом, перевірти чи заповнили ви усе правильно
+               <br />
+               Проблема з полем: {er}
+            </p>
+         )
+      } else {
+         return (
+            <p className="err">Усе має бути добре</p>
+         )
+      }
+   }
 
    return (
       <div className="modal">
@@ -43,11 +70,12 @@ export default function Modal({ onClose, update, data }) {
          <div className="modal_content">
             <img src="../img/close.png" alt="qwe" onClick={onClose} />
             <input type="text" value={inputName} id='Name' onChange={handleChange} placeholder='ПІБ' />
-            <input type="text" value={inputTel} id='Tel' onChange={handleChange} placeholder='Телефон' />
+            <input type="tel" value={inputTel} id='Tel' onChange={handleChange} placeholder='Телефон' />
             <input type="text" value={inputAdress} id='Adress' onChange={handleChange} placeholder='Адреса' />
             <input type="text" value={inputEmail} id='Email' onChange={handleChange} placeholder='Email' />
             <button onClick={handleSubmit}>Отправить</button>
          </div>
+         {err && <Err />}
       </div>
    );
 };

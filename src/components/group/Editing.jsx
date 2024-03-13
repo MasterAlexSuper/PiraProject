@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 
 export default function Editing({ onClose, update, data }) {
 
+   const [err, setErr] = useState(false);
+
    let curChange = document.querySelector(".active_cell")
    if (!curChange) {
       return (<div style={{ color: 'white', textAlign: 'center', marginTop: '20px', marginBottom: '20px', fontSize: '20px' }}>Select row to edit</div>)
@@ -17,7 +19,7 @@ export default function Editing({ onClose, update, data }) {
    }
 
 
-   const [inputName, setInputName] = useState(curChange.children[0].textContent);
+   const [inputName, setInputName] = useState(curChange.children[0].textContent.trim());
    const [inputTel, setInputTel] = useState(curChange.children[1].textContent);
    const [inputAdress, setInputAdress] = useState(curChange.children[2].textContent);
    const [inputEmail, setInputEmail] = useState(curChange.children[3].textContent);
@@ -26,35 +28,62 @@ export default function Editing({ onClose, update, data }) {
 
       switch (event.target.id) {
          case 'Name':
-            setInputName(event.target.value);
+            setInputName(event.target.value.trim());
             break;
          case 'Tel':
-            setInputTel(event.target.value);
+            setInputTel(event.target.value.trim());
             break;
          case 'Adress':
-            setInputAdress(event.target.value);
+            setInputAdress(event.target.value.trim());
             break;
          case 'Email':
-            setInputEmail(event.target.value);
+            setInputEmail(event.target.value.trim());
             break;
       }
 
    };
 
    const handleSubmit = () => {
-      let oldTable = JSON.parse(localStorage.getItem('table'))
-      let newTable = oldTable.map((item) => {
-         let nItem = item
-         if (id == nItem.id) {
-            return ({ id: id, name: inputName, tel: inputTel, adress: inputAdress, email: inputEmail })
-         }
-         else return (item)
-      })
-      localStorage.removeItem('table')
-      localStorage.setItem('table', JSON.stringify(newTable))
-      update(newTable)
-      onClose();
+      if (!/\d/.test(inputName) && inputAdress.length >= 3 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail) && !/[a-zA-Z]/.test(inputTel)) {
+         let oldTable = JSON.parse(localStorage.getItem('table'))
+         let newTable = oldTable.map((item) => {
+            let nItem = item
+            if (id == nItem.id) {
+               return ({ id: id, name: inputName, tel: inputTel, adress: inputAdress, email: inputEmail })
+            }
+            else return (item)
+         })
+         localStorage.removeItem('table')
+         localStorage.setItem('table', JSON.stringify(newTable))
+         update(newTable)
+         onClose();
+      }
+      else {
+         setErr(true)
+      }
    };
+
+   let Err = () => {
+      let er = "";
+      if (/\d/.test(inputName)) er = "Ім'я";
+      if (inputAdress.length <= 3) er = "Адреса";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail)) er = "Email";
+      if (/[a-zA-Z]/.test(inputTel)) er = "Телефон";
+
+      if (/\d/.test(inputName) || inputAdress.length <= 3 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail) || /[a-zA-Z]/.test(inputTel)) {
+         return (
+            <p className='err'>Щось пішло не за планом, перевірти чи заповнили ви усе правильно
+               <br />
+               Проблема з полем: {er}
+            </p>
+         )
+      } else {
+         return (
+            <p className="err">Усе має бути добре</p>
+         )
+      }
+   }
+
 
    return (
       <div className="modal">
@@ -68,6 +97,7 @@ export default function Editing({ onClose, update, data }) {
             <input type="text" value={inputEmail} id='Email' onChange={handleChange} placeholder='Email' />
             <button onClick={handleSubmit}>Отправить</button>
          </div>
+         {err && <Err />}
       </div>
    );
 };
